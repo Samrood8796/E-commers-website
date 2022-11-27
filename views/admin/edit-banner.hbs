@@ -1,0 +1,183 @@
+<link href="/assets/css/bootstrap-2.min.css" rel="stylesheet">
+
+<!-- Template Stylesheet -->
+<link href="/assets/css/style3.css" rel="stylesheet">
+<div class="container-fluid position-relative d-flex p-0">
+    {{!-- <div class="content">
+        <div class="bg-secondary"> --}}
+            <div class="container">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+
+                    <div class="col-12 col-lg-12 d-flex align-items-center">
+                        <div class="card-body p-4 p-lg-5 text-black">
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><u>Edit banner</u></p>
+
+                            <div class="d-flex align-items-center mb-3 pb-1">
+
+                                <form action="/admin/edit-banner" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        {{#if bannerRepeatError}}
+                                        <div class="alert alert-danger">
+                                            <strong>{{bannerRepeatError}}</strong>
+                                        </div>
+                                        {{/if}}
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        {{!-- <i class="fas fa-user fa-lg me-3 fa-fw"></i> --}}
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" name="_id" required="true" value="{{bannerDetails._id}}"
+                                                id="form3Example1c" class="form-control d-none " />
+
+                                        </div>
+                                    </div>
+                                    <label class="form-label" for="form3Example1c">Name</label>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        {{!-- <i class="fas fa-user fa-lg me-3 fa-fw"></i> --}}
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" name="name" 
+                                                value="{{bannerDetails.name}}" onkeyup="validateBanner()" id="banner"
+                                                class="form-control" />
+
+                                        </div>
+                                        <div id="bannerError"></div>
+                                    </div>
+
+                                    <label class="form-label" for="form3Example3c">sub-Name</label>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        {{!-- <i class="fas fa-phone fa-lg me-3 fa-fw"></i> --}}
+
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" onkeyup="validateSubName()" name="subname" id="subName" class="form-control form-control-lg"
+                                                placeholder="text" value="{{bannerDetails.subname}}" />
+
+                                        </div>
+                                        <div id="subNameError"></div>
+                                    </div>
+                                    <label class="form-label" for="form3Example4c">Offer</label>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        {{!-- <i class="fas fa-lock fa-lg me-3 fa-fw"></i> --}}
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="tel" onkeyup="validatePercentage()" name="offer" id="offer" class="form-control form-control-lg"
+                                                placeholder="offer value" value="{{bannerDetails.offer}}" />
+
+                                        </div>
+                                        <div id="percentageError"></div>
+                                    </div>
+
+                                    <label class="form-label" for="image1">Image</label>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        {{!-- <i class="fas fa-lock fa-lg me-3 fa-fw"></i> --}}
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="file" id="image" onkeyup="validateImage()" name="image"  class="form-control"
+                                                onchange="viewImage(event)" />
+                                            <img style=" height:10rem" width="" class="d-flex"
+                                                src="/banner-images/{{bannerDetails._id}}.jpg" alt="" id="imgView">
+
+                                        </div>
+                                        <div id="imageError"></div>
+                                    </div>
+
+
+
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="submit" class="btn btn-primary btn-lg">Edit Banner</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex mt-5 order-1 order-lg-2">
+                                {{!-- sideimage --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function viewImage(event) {
+        document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+    }
+
+</script>
+
+{{!-- banner validation --}}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+
+      var bannerError = document.getElementById('bannerError')
+      var percentageError = document.getElementById('percentageError')
+      var subNameError = document.getElementById('subNameError')
+      var imageError = document.getElementById('imageError')
+
+      function validateBanner() {
+            var banner = document.getElementById('banner').value.trim()
+            if (banner.length < 4) {
+                  bannerError.innerHTML = "need minimum 4 characters"
+                  bannerError.style.color = "red"
+                  return false;
+            }
+            bannerError.innerHTML = 'valid';
+            bannerError.style.color = 'green'
+            return true;
+      }
+
+      function validateSubName() {
+            var subName = document.getElementById('subName').value.trim()
+            if (subName.length < 4) {
+                  subNameError.innerHTML = "need minimum 4 characters"
+                  subNameError.style.color = "red"
+                  return false;
+            }
+            subNameError.innerHTML = 'valid';
+            subNameError.style.color = 'green'
+            return true;
+      }
+
+      function validatePercentage() {
+            var percentage = document.getElementById('offer').value.trim();
+
+            if (percentage > 95 || percentage.length == 0) {
+                  percentageError.innerHTML = "Value must be less than 90"
+                  percentageError.style.color = "red";
+                  return false;
+            }
+            percentageError.innerHTML = 'valid';
+            percentageError.style.color = 'green'
+            return true;
+      }
+
+      function validateImage() {
+            var image = document.getElementById('image').value.trim();
+
+            if (image.length == 0) {
+                  imageError.innerHTML = 'Select an image';
+                  imageError.style.color = 'red'
+                  return false;
+            }
+            imageError.innerHTML = 'valid';
+            imageError.style.color = 'green'
+            return true;
+
+      }
+
+
+
+      $(document).on("submit", "form", function (e) {
+            validateBanner()
+            validatePercentage()
+            validateSubName()
+            validateImage()
+
+            if (validatePercentage() && validateBanner() && validateSubName() && validateImage()) {
+                  alert('banner added')
+            } else {
+                  e.preventDefault();
+                  return false;
+            }
+      })
+</script>

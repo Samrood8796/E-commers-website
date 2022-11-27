@@ -1,0 +1,403 @@
+{{#if cartProduct}}
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="/">Home</a>
+                <a class="breadcrumb-item text-dark" href="/shop">Shop</a>
+                <a class="breadcrumb-item text-dark" href="/cart">Cart</a>
+                <span class="breadcrumb-item active">place order</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+
+<!-- Checkout Start -->
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-end ">
+        <form action="">
+            <div class="input-group">
+                <input type="text" id="coupon" name="coupon" class="form-control border-0 p-4"
+                    placeholder="Coupon Code">
+                <div class="input-group-append">
+                    <a class="btn btn-dark " onclick="couponApply()">Apply Coupon</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <form action="" id="checkout-form">
+        <div class="row px-xl-5">
+            <div class="col-md-6 ">
+
+                <div class="my-3"><a  class="btn btn-info text-light border" href="/add-shipping-address">Add Address</a></div>
+
+
+                <h5>Select Shipping Address</h5>
+
+                {{#each user.address}}
+                <div class="custom-control custom-checkbox me-sm-2 border">
+                    <input type="radio" class="custom-control-input"
+                        onclick="selectAddress('{{this.name}}','{{this.address}}','{{this.town}}','{{this.district}}','{{this.state}}','{{this.pincode}}','{{this.phone}}')"
+                        value="" name="address" id="{{@index}}">
+                    <label class="custom-control-label"
+                        for="{{@index}}">{{this.name}}<br>{{this.address}},{{this.town}},{{this.district}}<br>{{this.state}},{{this.pincode}},{{this.phone}}</label>
+                </div>
+                {{/each}}
+
+            </div>
+            <div class="col-lg-8 ">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing
+                        Address</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input name="coupon" id="CouponName" type="text" hidden>
+                            <label>First Name</label>
+                            <input class="form-control" id="name" type="text" name="firstName" placeholder="First Name"
+                                required>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Mobile No</label>
+                            <input class="form-control" type="text" id="phone" name="mobile" placeholder="Mobile No"
+                                required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Address Line</label>
+                            <input class="form-control" type="text" id="address" name="address1" placeholder="Address"
+                                required>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>District</label>
+                            <input class="form-control" type="text" id="district" name="district" placeholder="District"
+                                required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>town</label>
+                            <input class="form-control" id="town" type="text" name="town" placeholder="" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>State</label>
+                            <input class="form-control" id="state" type="text" name="state" placeholder="" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>PIN Code</label>
+                            <input class="form-control" type="text" id="pincode" name="pincode" placeholder="" required>
+                        </div>
+                        <div>
+                            <input type="text" name="user_id" id="" value="{{user._id}}" hidden>
+                        </div>
+                        {{!-- <div class="col-md-12 form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="newaccount">
+                                <label class="custom-control-label" for="newaccount">Create an account</label>
+                            </div>
+                        </div> --}}
+                        {{!-- <div class="col-md-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="shipto">
+                                <label class="custom-control-label" for="shipto" data-toggle="collapse"
+                                    data-target="#shipping-address">Ship to different address</label>
+                            </div>
+                        </div> --}}
+                    </div>
+                </div>
+                {{!-- <div class="collapse mb-5" id="shipping-address">
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span
+                            class="bg-secondary pr-3">Shipping Address</span></h5>
+                    <div class="bg-light p-30">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>First Name</label>
+                                <input class="form-control" type="text" placeholder="John">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Last Name</label>
+                                <input class="form-control" type="text" placeholder="Doe">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>E-mail</label>
+                                <input class="form-control" type="text" placeholder="example@email.com">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Mobile No</label>
+                                <input class="form-control" type="text" placeholder="+123 456 789">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Address Line 1</label>
+                                <input class="form-control" type="text" placeholder="123 Street">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Address Line 2</label>
+                                <input class="form-control" type="text" placeholder="123 Street">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Country</label>
+                                <select class="custom-select">
+                                    <option selected>United States</option>
+                                    <option>Afghanistan</option>
+                                    <option>Albania</option>
+                                    <option>Algeria</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>City</label>
+                                <input class="form-control" type="text" placeholder="New York">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>State</label>
+                                <input class="form-control" type="text" placeholder="New York">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>ZIP Code</label>
+                                <input class="form-control" type="text" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+            </div>
+            <div class="col-lg-4">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order
+                        Total</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    {{!-- <div class="border-bottom">
+                        <h6 class="mb-3">Products</h6>
+                        <div class="d-flex justify-content-between">
+                            <p>Product Name 1</p>
+                            <p>...</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>Product Name 2</p>
+                            <p>...</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>Product Name 3</p>
+                            <p>...</p>
+                        </div>
+                    </div> --}}
+
+                    <div class="border-bottom pt-3 pb-2">
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Subtotal</h6>
+                            <h6>Rs.<span id="subtotal">{{totalValue}}</span></h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Discount</h6>
+                            <h6 class="font-weight-medium">Rs.<span id="discount">0</span></h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium">Rs.0</h6>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5>Total</h5>
+                            <h5>Rs.<span id="total">{{totalValue}}</span></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span
+                            class="bg-secondary pr-3">Payment</span></h5>
+                    <div class="bg-light p-30">
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" value="paypal" name="paymentMethod"
+                                    id="paypal">
+                                <label class="custom-control-label" for="paypal">Paypal</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" value="COD" name="paymentMethod"
+                                    id="directcheck">
+                                <label class="custom-control-label" for="directcheck">Cash On Delivery</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" value="Razorpay" name="paymentMethod"
+                                    id="Razorpay" required>
+                                <label class="custom-control-label" for="Razorpay">Razorpay</label>
+                            </div>
+                        </div>
+                        {{#if show_Wallet}}
+                        <div class="form-group mb-4">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" value="wallet" name="paymentMethod"
+                                    id="wallet" required>
+                                <label class="custom-control-label" for="wallet">Wallet</label>
+                            </div>
+                        </div>
+                        {{/if}}
+                        <button type="submit" class="btn btn-block btn-dark font-weight-bold py-3">Place
+                            Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+{{else}}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="d-flex">
+                <img src="/images/empty-cart.jpg" alt="">
+                <h1 class="justify-content-center mt-5 pt-5" style="padding-top: 200px;">Your need to add products in to
+                    Cart!! <br>
+                    <a href="/" class="btn btn-dark ">Continue Shopping</a>
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+<!-- Checkout End -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    $('#checkout-form').submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/place-order',
+            method: 'post',
+            data: $('#checkout-form').serialize(),
+            success: (response) => {
+                if (response.codSuccess) {
+                    swal.fire('order placed').then(() => {
+                        location.href = '/order-placed'
+                    })
+                } else if (response.paypal) {
+                    location.href = response.link
+                } else if (response.wallet) {
+                    swal.fire('order placed').then(() => {
+                        location.href = '/order-placed'
+                    })
+                }
+                else {
+                    razorpayPayment(response)
+                }
+            }
+        })
+    })
+    function razorpayPayment(order) {
+        var options = {
+            "key": "rzp_test_f0sxM1O8sb1zuj", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "PERFUME",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+                verifyPayment(response, order)
+            },
+            "prefill": {
+                "name": "Samrood",
+                "email": "Samrood@example.com",
+                "contact": "000000000"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+    function verifyPayment(payment, order) {
+        $.ajax({
+            url: '/verify-payment',
+            data: {
+                payment,
+                order
+            },
+            method: 'post',
+            success: (response) => {
+                console.log(response)
+                if (response.status) {
+                    location.href = '/order-placed'
+                } else {
+                    swal.fire('payment Failed')
+                }
+            }
+        })
+    }
+
+</script>
+<script>
+    function selectAddress(name, address, town, district, state, pincode, phone) {
+        document.getElementById('name').value = name
+        document.getElementById('address').value = address
+        document.getElementById('town').value = town
+        document.getElementById('district').value = district
+        document.getElementById('state').value = state
+        document.getElementById('pincode').value = pincode
+        document.getElementById('phone').value = phone
+    }
+</script>
+
+<script>
+    function couponApply() {
+        console.log("entered")
+        let couponCode = document.getElementById('coupon').value
+        $.ajax({
+            url: '/coupon-apply',
+            data: {
+                coupon: couponCode,
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.couponSuccess) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Coupon Applied Successfully",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
+                    document.getElementById('total').innerHTML = response.total
+                    document.getElementById('discount').innerHTML = response.discountValue
+                    document.getElementById('CouponName').value = response.coupon
+                    console.log(response.coupon)
+                } else if (response.couponUsed) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "You are Already Used This Coupon",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+
+                } else if (response.couponExpired) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "Entered Coupon Expired",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else {
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "Invalid Coupon",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                }
+            }
+        })
+    }
+</script>

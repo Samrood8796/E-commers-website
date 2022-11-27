@@ -1,0 +1,131 @@
+<section>
+    <div class="container-fluid">
+    <div class="row px-xl-5 pt-5">
+        <div class=" table-responsive mb-5">
+            
+            {{#if offerExist}}
+            <p class="error text-danger">{{offerExist}}</p>
+            {{/if}} 
+            <table class="table table-light table-borderless table-hover text-center mb-3">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>category</th>
+                        <th>Starting Date</th>
+                        <th>Expire Date</th>
+                        <th>offer(%)</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                        {{#each allCatOffer}}
+                    <tr>
+                        <td class="align-middle">{{inc @index}}</td>
+                        <td class="align-middle">{{this.category}}</td>
+                        <td class="align-middle">{{this.starting}}</td>
+                        <td class="align-middle">{{this.expiry}}</td>
+                        <td class="align-middle">{{this.catOfferPercentage}}</td>
+                        <td class="align-middle icon-red"><a href="/admin/edit-catOffer/{{this._id}}"><i class="fa fa-edit"
+                  style="font-size:24px; color: rgb(0, 47, 255);"></i></a></td>
+                        <td class="align-middle"><a onclick="return confirm('delete {{this.offer}} coupon')" href="/admin/delete-catOffer/{{this._id}}"><i class="fa fa-trash-o"
+                  style="font-size:24px;color: rgb(255, 0, 0);"></i></a></td>
+                    </tr>
+                        {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</section>
+
+<section>
+    <div class="container ">
+        <div class="row justify-content-center">
+            <div class="col-md-6 justify-content-center">
+                <h2>Add Category Offer</h2>
+                <form action="/admin/category-offer" method="post">
+
+                    <label for="category">Category</label>
+                    <select name="category" class="form-control">
+                        {{#each category}}
+                        <option>{{this.category}}</option>
+                        {{/each}}
+                    </select>
+
+                    <label for="starting">starting Date</label>
+                    <input type="date" id="startDate" name="starting" class="form-control"required>
+
+                    <label for="expiry">Expire Date</label>
+                    <input type="date" id="endDate" name="expiry" class="form-control"required>
+
+                    <label for="catOfferPercentage">offer</label>
+                    <input type="number" name="catOfferPercentage" id="offer" onkeyup="validatePercentage()" class="form-control">
+                    <div id="percentageError"></div>
+
+                    <button type="submit" class="btn btn-info mt-4">submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{!-- date validation --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{{!-- <script>
+    $("#startDate").on("change", function () {
+        $("#endDate").attr("min", $(this).val());
+    });
+</script> --}}
+
+<script>
+    $(document).ready(function () {
+        let today = new Date()
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+
+        $('#startDate').attr('min', today)
+        $('#startDate').change(function () {
+            let date = document.getElementById('startDate').value
+            $('#endDate').attr('min', date)
+        })
+    })
+</script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+    var percentageError = document.getElementById('percentageError')
+
+
+    function validatePercentage(){
+        var percentage = document.getElementById('offer').value.trim();
+
+        if(percentage > 95 || percentage.length == 0){
+            percentageError.innerHTML = "Value must be less than 95"
+            percentageError.style.color = "red";
+            return false;
+        }
+        percentageError.innerHTML = 'valid';
+        percentageError.style.color = 'green'
+        return true;
+    }
+    $(document).on("submit", "form", function (e) {
+        if(validatePercentage()){
+        }else{
+            e.preventDefault();
+            return false;
+        }
+    })
+</script>

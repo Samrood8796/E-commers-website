@@ -1,0 +1,251 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 justify-content-center">
+                <h2>Edit product</h2>
+                <form action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" onkeyup="validateName()" value="{{product.name}}" class="form-control" >
+                    <div id="name-error"></div>
+
+                    <label for="category">category</label>
+                    <input type="text" name="category" readonly value="{{product.category}}" class="form-control">
+                    
+
+                    <label for="stock">Stock</label>
+                    <input type="number" id="stock" name="stock" onkeyup="validateStock()" value="{{product.stock}}" class="form-control">
+                     <div id="stock-error"></div>
+
+                    
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="price" onkeyup="validatePrice()" value="{{product.price}}" class="form-control" >
+                      <div id="price-error"></div>
+
+
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description" onkeyup="validateDescription()" value="{{product.description}}" class="form-control" >
+                       <div id="description-error"></div>
+
+
+                    <label for="image">image</label>
+                    <img src="/product-images/{{product._id}}.jpg" alt="" style="width: 100px;height:auto;"
+                        id="imageview" class="pt-3">
+                    <input type="file" id="myFile1" name="image" onkeyup="validateImage()" onchange="viewImage(event)" class="form-control" >
+                      <div id="image-error"></div>
+
+
+                    <label for="image1">image1</label>
+                    <img src="/product-images/{{product._id}}1.jpg" alt="" style="width: 100px;height:auto;"
+                        id="imageview1" class="pt-3">
+                    <input type="file" id="image1" name="image1" onkeyup="validateImage1()" onchange="viewImage1(event)" class="form-control" >
+                    <div id="image-error2"></div>
+
+
+                    <label for="image2">image2</label>
+                    <img src="/product-images/{{product._id}}2.jpg" alt="" style="width: 100px;height:auto;"
+                        id="imageview2" class="pt-3">
+                    <input type="file" id="image2" name="image2" onkeyup="validateImage2()" onchange="viewImage2(event)" class="form-control" >
+                     <div id="image-error3"></div>
+
+
+                    <label for="image3">image3</label>
+                    <img src="/product-images/{{product._id}}3.jpg" alt="" style="width: 100px;height:auto;"
+                        id="imageview3" class="pt-3">
+                    <input type="file" id="image3" name="image3" onkeyup="validateImage3()" onchange="viewImage3(event)" class="form-control">
+                     <div id="image-error4"></div>
+                    <button type="submit" class="btn btn-success mt-4">submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function viewImage(event) {
+        document.getElementById('imageview').src = URL.createObjectURL(event.target.files[0])
+    }
+    function viewImage1(event) {
+        document.getElementById('imageview1').src = URL.createObjectURL(event.target.files[0])
+    }
+    function viewImage2(event) {
+        document.getElementById('imageview2').src = URL.createObjectURL(event.target.files[0])
+    }
+    function viewImage3(event) {
+        document.getElementById('imageview3').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script>
+    var nameError = document.getElementById('name-error');
+    var priceError = document.getElementById('price-error');
+    var descriptionError = document.getElementById('description-error');
+    var stockError = document.getElementById('stock-error');
+
+    // var imageError = document.getElementsByClassName('image-error');
+    var imageError = document.getElementById('image-error');
+    var imageError2 = document.getElementById('image-error2');
+    var imageError3 = document.getElementById('image-error3');
+    var imageError4 = document.getElementById('image-error4');
+
+    // var passwordError = document.getElementById('password-error');
+
+    function validateName() {
+        var name = document.getElementById('name').value.trim();
+
+        if (name.length == 0) {
+            nameError.innerHTML = 'Name is Required';
+            nameError.style.color = 'red'
+            return false;
+        }
+
+        if (!name.match(/^[A-Za-z ]*$/)) {
+            nameError.innerHTML = 'Write a FullName';
+            nameError.style.color = 'red'
+            return false;
+        }
+        if (name.length < 2) {
+            nameError.innerHTML = 'Enter correct name';
+            nameError.style.color = 'red'
+            return false;
+        }
+
+        nameError.innerHTML = 'Name is valid';
+        nameError.style.color = 'green'
+        return true;
+    }
+
+    function validatePrice() {
+        var price = document.getElementById('price').value.trim();
+
+        if (price.length == 0) {
+            priceError.innerHTML = 'Price is Required';
+            priceError.style.color = 'red'
+            return false;
+        }
+        if (!price.match(/^[0-9 ]*$/)) {
+            priceError.innerHTML = 'Enter numbers only';
+            priceError.style.color = 'red'
+            return false;
+        }
+        priceError.innerHTML = 'valid';
+        priceError.style.color = 'green'
+        return true;
+    }
+
+        function validateStock() {
+        var stock = document.getElementById('stock').value.trim();
+
+        if (stock.length == 0) {
+            stockError.innerHTML = 'stock is Required';
+            stockError.style.color = 'red'
+            return false;
+        }
+        if(stock <0){
+            stockError.innerHTML = 'Enter valid number';
+            stockError.style.color = 'red'
+            return false;
+        }
+        if (!stock.match(/^[0-9 ]*$/)) {
+            stockError.innerHTML = 'Enter numbers only';
+            stockError.style.color = 'red'
+            return false;
+        }
+        stockError.innerHTML = 'valid';
+        stockError.style.color = 'green'
+        return true;
+    }
+
+
+    function validateDescription() {
+        var description = document.getElementById('description').value.trim();
+
+        if (description.length == 0) {
+            descriptionError.innerHTML = 'Description is Required';
+            descriptionError.style.color = 'red'
+            return false;
+        }
+     
+        descriptionError.innerHTML = 'valid';
+        descriptionError.style.color = 'green'
+        return true;
+    }
+
+    function validateImage() {
+        var images = document.getElementById('myFile1').value.trim();
+
+        if (images.length == 0) {
+            imageError.innerHTML = 'Select an image';
+            imageError.style.color = 'red'
+            return false;
+        }
+        imageError.innerHTML = 'valid';
+        imageError.style.color = 'green'
+        return true;
+
+    }
+
+    function validateImage1() {
+        var images2 = document.getElementById('image1').value.trim();
+
+        if (images2.length == 0) {
+            imageError2.innerHTML = 'Select an image';
+            imageError2.style.color = 'red'
+            return false;
+        }
+        imageError2.innerHTML = 'valid';
+        imageError2.style.color = 'green'
+        return true;
+
+    }
+
+    function validateImage2() {
+        var images3 = document.getElementById('image2').value.trim();
+
+        if (images3.length == 0) {
+            imageError3.innerHTML = 'Select an image';
+            imageError3.style.color = 'red'
+            return false;
+        }
+        imageError3.innerHTML = 'valid';
+        imageError3.style.color = 'green'
+        return true;
+
+    }
+
+    function validateImage3() {
+        var images4 = document.getElementById('image3').value.trim();
+
+        if (images4.length == 0) {
+            imageError4.innerHTML = 'Select an image';
+            imageError4.style.color = 'red'
+            return false;
+        }
+        imageError4.innerHTML = 'valid';
+        imageError4.style.color = 'green'
+        return true;
+
+    }
+
+
+
+    $(document).on("submit", "form", function (e) {
+        validateName()
+        validatePrice()
+        validateDescription()
+        validateStock()
+        validateImage()
+        validateImage1()
+        validateImage2()
+        validateImage3()
+        if (validateName() && validatePrice() && validateDescription() && validateImage() && validateImage1() && validateImage2() && validateImage3() &&  validateStock()) {
+            alert('Product edited successfully')
+        } else {
+            e.preventDefault();
+            alert('Invalid data!');
+            return false;
+        }
+    });
+</script>

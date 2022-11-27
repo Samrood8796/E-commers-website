@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row px-xl-5 pt-5">
+    <div class=" table-responsive mb-5">
+      <div class="row justify-content-end d-flex mb-3">
+        <div class="">
+          <a class="btn btn-info" href="/admin/add-category">Add Category</a>
+        </div>
+        <div class="mx-3 ">
+          <a class="btn btn-info" href="/admin/category-offer">Category Offer</a>
+        </div>
+      </div>
+
+      <table id="productsTable" class="table text-center">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">No</th>
+
+            <th scope="col">Category</th>
+
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {{#each category}}
+          <tr>
+            <td scope="row">{{inc @index}}</td>
+            <td>{{this.category}}</td>
+
+            <td><a href="/admin/edit-category/{{this._id}}" class="btn "><i class="fa fa-edit fa-2x text-dark"
+                  ></i></a>
+            </td>
+            <td><a href="/admin/delete-category/{{this._id}}" class="btn "
+                onclick="return confirm('delete {{this.category}} category ')"><i class="fa fa-trash-o fa-2x text-dark"
+                  ></i></a>
+            </td>
+            {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

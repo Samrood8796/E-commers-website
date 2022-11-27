@@ -1,0 +1,488 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+    }.right
+
+    .chartMenu {
+        width: 100vw;
+        height: 40px;
+        background: #1A1A1A;
+        color: rgba(255, 26, 104, 1);
+    }
+
+    .chartMenu p {
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    .chartCard {
+        width: 100%;
+        height: calc(100vh - 40px);
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .chartBox {
+        width: 700px;
+        padding: 20px;
+        border-radius: 20px;
+        border: solid 3px #ffc107;
+        background: white;
+    }
+    .right-panel {
+  background: #f1f2f7;
+  margin-left: 0px;
+  margin-top: 30px; }
+</style>                        
+<!-- ##### Main Content Wrapper End ##### -->
+{{!-- cart-table-area --}}
+
+<div class="ml-auto w-75">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-12 mt-5">
+                    <div class="row">
+
+                     <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <i class="pe-7s-users"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text"><span class="count">{{userCount}}</span></div>
+                                            <div class="stat-heading">USERS</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <i class="pe-7s-shopbag"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text"><span class="count">{{orderCount}}</span></div>
+                                            <div class="stat-heading">ORDERS</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                       
+                         <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <i class="pe-7s-menu"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text"><span class="count">{{productCount}}</span></div>
+                                            <div class="stat-heading">PRODUCTS</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <i class="pe-7s-cash"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text">Rs.<span class="count">{{totalRevenue}}</span></div>
+                                            <div class="stat-heading">TOTAL REVENUE</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                         <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <i class="pe-7s-cash"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text">Rs.<span class="count">{{dailyRevenue}}</span></div>
+                                            <div class="stat-heading">DAILY REVENUE</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                     <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <i class="pe-7s-cash"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text">Rs.<span class="count">{{weeklyRevenue}}</span></div>
+                                            <div class="stat-heading">WEAKLY REVENUE</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <i class="pe-7s-cash"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text">Rs.<span class="count">{{monthlyRevenue}}</span></div>
+                                            <div class="stat-heading">MONTHLY REVENUE</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <i class="pe-7s-cash"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text">Rs.<span class="count">{{yearlyRevenue}}</span></div>
+                                            <div class="stat-heading">YEARLY REVENUE</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                            
+                            
+                    <div class="chartCard">
+                                <div class="chartBox">
+                                    <canvas id="revenueChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="chartCard">
+                                <div class="chartBox">
+                                    <canvas id="totalRevenueChart"></canvas>
+                                </div>
+                            </div>
+                            <section class="container-fluid">
+                                <div class="row">
+                                    <div class="ml-auto mr-auto bg-white p-3" style="width: 70%;border-radius: 20px;border: solid 3px #ffc107;">
+                                        <canvas id="bar-chart" ></canvas>
+                                    </div>
+                                    <div class="ml-auto mr-auto mt-5 bg-white p-3"  style="width: 70%;border-radius: 20px;border: solid 3px #ffc107;">
+                                        <canvas id="circle-chart" ></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5"  style="width: 60%;">
+                                        <canvas id="finalchart" style="display: block; box-sizing: border-box;"></canvas>
+                                    </div>
+                            </section>
+                    </div>
+                    {{!-- <a href="/admin/add-admin" class="btn btn-dark">add admin</a> --}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // setup 
+    var data = {
+        labels: ['Daily Revenue','Weekly Revenue','Monthly Revenue','Yearly Revenue'],
+        datasets: [{
+            label: 'Revenue',
+            data: [{{dailyRevenue}},{{weeklyRevenue}},{{monthlyRevenue}},{{yearlyRevenue}}],
+            backgroundColor: [
+                'rgba(255, 26, 104, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(0, 0, 0, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 26, 104, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(0, 0, 0, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    // config 
+    var config = {
+        type: 'bar',
+        data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    // render init block
+    var myChart = new Chart(
+        document.getElementById('revenueChart'),
+        config
+    );
+</script>
+<script>
+    // setup 
+    var data = {
+        labels: ['Total Revenue'],
+        datasets: [{
+            label: 'Revenue',
+            data: [{{totalRevenue}}],
+            backgroundColor: [
+                'rgba(255, 26, 104, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(0, 0, 0, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 26, 104, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(0, 0, 0, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    // config 
+    var config = {
+        type: 'bar',
+        data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    // render init block
+    var myChart = new Chart(
+        document.getElementById('totalRevenueChart'),
+        config
+    );
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
+<script>
+  
+    let monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    let monthlyProfit = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    let weekly = [0, 0, 0, 0, 0, 0, 0]
+    let weekName = [ "Sunday", "Monday", "Tuesday", "WednesDay", "Thursday", "Friday", "Saturday"]
+    let paymethod=["Paypal","Razorpay","Cash on Delivery"]
+    let payamount=[0,0,0]
+    let barChart = document.getElementById("bar-chart").getContext('2d')
+    let circleChart = document.getElementById("circle-chart").getContext('2d')
+    let finalchart=document.getElementById("finalchart").getContext('2d')
+    document.addEventListener('DOMContentLoaded', () => 
+    {
+      console.log("haiii")
+        fetch('/admin/chart-data', 
+        {
+            method: 'get',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' }
+        }).then(res => res.json()).then(res => 
+        {
+            let { data, weeklyReport } = res;
+            for (i = 0; i < data.length; ++i) 
+            {
+                switch (data[i].month)
+                 {
+                    case 1:
+                        monthlyProfit[0] = data[i].total
+                        break;
+                    case 2:
+                        monthlyProfit[1] = data[i].total
+                        break;
+                    case 3:
+                        monthlyProfit[2] = data[i].total
+                        break;
+                    case 4:
+                        monthlyProfit[3] = data[i].total
+                        break;
+                    case 5:
+                        monthlyProfit[4] = data[i].total
+                        break;
+                    case 6:
+                        monthlyProfit[5] = data[i].total
+                        break;
+                    case 7:
+                        monthlyProfit[6] = data[i].total
+                        break;
+                    case 8:
+                        monthlyProfit[7] = data[i].total
+                        break;
+                    case 9:
+                        monthlyProfit[8] = data[i].total
+                        break;
+                    case 10:
+                        monthlyProfit[9] = data[i].total
+                        break;
+                    case 11:
+                        monthlyProfit[10] = data[i].total
+                        break;
+                    case 12:
+                        monthlyProfit[11] = data[i].total
+                        break;
+                }
+            }
+            console.log(monthlyProfit)
+            console.log(weeklyReport)
+            const months = monthName;
+            const data1 = {
+                labels: months,
+                datasets: [{
+                    label: 'Monthly sales',
+                    backgroundColor: "blue",
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: monthlyProfit,
+                }]
+            };
+            const monthlyconfig = {
+                type: 'bar',
+                data: data1,
+                options: {}
+            };
+            let chart1 = new Chart(barChart, monthlyconfig)
+
+            for (i = 0; i < weeklyReport.length; ++i) {
+                switch (weeklyReport[i].date) {
+                    case 1:
+                        weekly[0] = weeklyReport[i].total
+                        break;
+                    case 2:
+                        weekly[1] = weeklyReport[i].total
+                        break;
+                    case 3:
+                        weekly[2] = weeklyReport[i].total
+                        break;
+                    case 4:
+                        weekly[3] = weeklyReport[i].total
+                        break;
+                    case 5:
+                        weekly[4] = weeklyReport[i].total
+                        break;
+                    case 6:
+                        weekly[5] = weeklyReport[i].toeekNametal
+                        break;
+                    case 7: weekly[6] = weeklyReport[i].total
+                        break;
+                        
+                }
+            }
+            
+            //weekly sales
+            const labels = weekName;
+            const data2 = {
+                labels: labels,
+                datasets: [{
+                    label: 'Weekly sales',
+                    backgroundColor: 'red',
+                    borderColor: 'red',
+                    data: weekly,
+                }]
+            };
+            const config = {
+                type: 'bar',
+                data: data2,
+                options: {}
+            };
+            let chart2 = new Chart(circleChart, config)
+
+
+
+{{!-- 
+            for (i = 0; i < weeklyReport.length; ++i) {
+                switch (weeklyReport[i].method) {
+                    case 1:
+                        payamount[0] = weeklyReport[i].total
+                        break;
+                    case 2:
+                        payamount[1] = weeklyReport[i].total
+                        break;
+                    case 3:
+                        payamount[2] = weeklyReport[i].total
+                        break;
+                }
+            }
+            const paymentmethod=paymethod;
+            const data3={
+                labels:paymentmethod,
+                datasets:[{
+                    label: 'Payment Methods',
+                    backgroundColor: "green",
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: payamount,
+                }]
+            };
+             const config = {
+                type: 'line',
+                data: data3,
+                options: {}
+            };
+            let chart3 = new Chart(finalchart,config) --}}
+        })
+    })
+
+</script>

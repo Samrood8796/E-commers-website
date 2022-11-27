@@ -1,0 +1,51 @@
+<section>
+      <div class="container-fluid">
+            <div class=" px-xl-5 pt-5">
+                  <div>
+                        <div class="row justify-content-end d-flex ">
+                              {{!-- <div class="justify-content-start">BANNER MANAGEMENT</div> --}}
+                              <div class="mb-3 ">
+                                    <a href="/admin/add-banner" class="btn btn-info">Add banner</a>
+                              </div>
+                        </div>
+                        <div class=" table-responsive mb-5">
+                              <table class="table text-center" id="viewusers1">
+                                    <thead class=" thead-light">
+                                          <tr>
+                                                <th scope="col">No</th>
+                                                <th scope="col">Image</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">sub-name</th>
+                                                <th scope="col">offer</th>
+                                                <th scope="col">Edit</th>
+                                                <th scope="col">Delete</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          {{#each allbanners}}
+                                          <tr>
+                                                <th scope="row" class="fs-bold">{{inc @index}}</th>
+                                                <td><img style="height: 50px;width:50px;"
+                                                            src="/banner-images/{{this._id}}.jpg" alt="">
+                                                </td>
+                                                <td>{{this.name}}</td>
+                                                <td>{{this.subname}}</td>
+                                                <td>{{this.offer}}&nbsp;%</td>
+
+                                                <td><a href="/admin/edit-banner/{{this._id}}"><i
+                                                                  class="fa fa-edit fa-2x text-dark"
+                                                                  aria-hidden="true"></i></a></td>
+                                                <td><a href="/admin/delete-banner/{{this._id}}"><i
+                                                                  class="fa fa-trash fa-2x text-dark" aria-hidden="true"
+                                                                  onclick="return confirm('Are you sure want to Delete {{this.name}} banner')"></i></a>
+                                                </td>
+                                          </tr>
+                                          {{/each}}
+                                    </tbody>
+                              </table>
+                        </div>
+                  </div>
+
+            </div>
+      </div>
+</section>

@@ -1,0 +1,135 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 justify-content-center">
+                <h2>Add coupon</h2>
+                <form action="/admin/add-coupon" id="addCoupon" method="post">
+
+                    <label for="coupon">Coupon Name</label>
+                    <input type="text" id="coupon" name="coupon" onkeyup="validateCoupon()"  class="form-control" >
+                    <div id="couponError"></div>
+                    <label for="starting">starting Date</label>
+                    <input type="date" id="startDate" onkeyup="validateStartDate()" name="starting" class="form-control" required>
+                    <div id="startDateError"></div>
+
+                    <label for="expiry">Expire Date</label>
+                    <input type="date" id="endDate" onkeyup="validateEndDate()" name="expiry" class="form-control" required>
+                    <div id="endDateError"></div>
+
+
+                    <label for="offer">offer</label>
+                    <input id="offer" type="number" name="offer" class="form-control" onkeyup="validatePercentage()">
+                    <div id="percentageError"></div>
+
+                    <button onsubmit="formsubmit()" type="submit" class="btn btn-info border mt-4">submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{!-- date validation --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $("#startDate").on("change", function () {
+        $("#endDate").attr("min", $(this).val());
+    });
+</script>
+
+{{!-- <script>
+    $(document).ready(function () {
+        let today = new Date()
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+
+        $('#startDate').attr('min', today)
+        $('#startDate').change(function () {
+            let date = document.getElementById('startDate').value
+            $('#endDate').attr('min', date)
+        })
+    })
+</script> --}}
+
+{{!-- coupon validation --}}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+
+    var couponError = document.getElementById('couponError')
+    var percentageError = document.getElementById('percentageError')
+    var startDateError = document.getElementById('startDateError')
+    var endDateError = document.getElementById('endDateError')
+
+
+    function validateCoupon(){
+        var coupon = document.getElementById('coupon').value.trim()
+        if(coupon.length < 4 ){
+            couponError.innerHTML = "need minimum 4 characters"
+            couponError.style.color = "red"
+            return false;
+        }
+        couponError.innerHTML = 'valid';
+        couponError.style.color = 'green'
+        return true;
+    }
+    
+    function validatePercentage(){
+        var percentage = document.getElementById('offer').value.trim();
+
+        if(percentage > 95 || percentage.length == 0){
+            percentageError.innerHTML = "Value must be less than 90"
+            percentageError.style.color = "red";
+            return false;
+        }
+        percentageError.innerHTML = 'valid';
+        percentageError.style.color = 'green'
+        return true;
+    }
+
+    function validateStartDate(){
+        var startDate =document.getElementById('startDate').value.trim();
+        if(startDate  == null){
+            startDateError.innerHTML = 'this field is required'
+            startDateError.style.clor = 'red';
+            return false;
+        }
+        startDateError.innerHTML ='valid'
+        startDateError.style.color = 'green'
+        return true;
+    }
+
+    function validateEndDate(){
+        var endDate =document.getElementById('endDate').value.trim();
+        if(endDate  == null){
+            endDateError.innerHTML = 'this field is required'
+            endDateError.style.clor = 'red';
+            return false;
+        }
+        endDateError.innerHTML ='valid'
+        endDateError.style.color = 'green'
+        return true;
+    }
+
+
+    $(document).on("submit", "form", function (e) {
+        validateCoupon()
+        validatePercentage()
+        validateStartDate()
+        validateEndDate()
+        if(validatePercentage() && validateCoupon() && validateStartDate() && validateEndDate()){
+           alert('coupon added')
+        }else{
+            e.preventDefault();
+            return false;
+        }
+    })
+</script>

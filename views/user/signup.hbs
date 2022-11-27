@@ -1,0 +1,73 @@
+<body style="background-image: url('/img/fogg.jpg');">
+    <style>
+        .group {
+            display: table;
+            width: 100%;
+        }
+
+        .item {
+            display: table-cell;
+        }
+
+        .text {
+            white-space: nowrap;
+            width: 1%;
+            padding: 0 10px;
+        }
+
+        .line {
+            border-bottom: 1px solid #000;
+            position: relative;
+            top: -.5em;
+        }
+    </style>
+    <section>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-4 border rounded" style="background-color:#fff;">
+                    <div>
+                        <h2 class=" text-center" style="color: black;">Signup</h2>
+                    </div>
+                    {{#if signUpErr}}
+                    <p class="error text-danger">{{signUpErr}}</p>
+                    {{/if}}
+                    {{#if referErr}}
+                    <p class="error text-danger">{{referErr}}</p>
+                    {{/if}}
+                    <form action="/signup" id="signup" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" name="phone" id="phone"
+                                placeholder="Mobile Number">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="referalCode" id="referal"
+                                placeholder="Referalcode">
+                        </div>
+                        <div class="group mb-4">
+                            <div class="item line"></div>
+                            <div class="item text text-dark font-weight-bold">Already have an Account? <a
+                                    href="/login">Log In</a>
+                            </div>
+                            <div class="item line"></div>
+                        </div>
+                        <div class=" justify-content-center d-flex mb-4">
+                            <button type="submit" class="btn btn-dark w-100">Signup</button>
+                        </div>
+                        
+                    </form>
+                </div class="mb-5">
+            </div>
+        </div>
+    </section>
+</body>

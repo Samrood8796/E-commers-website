@@ -1,0 +1,48 @@
+
+<div class="container">
+<div class="col-lg-12">
+    <form action="/add-shipping-address" method="post">
+    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing
+            Address</span></h5>
+    <div class="bg-light p-30 mb-5">
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <input name="coupon" id="CouponName" type="text" hidden>
+                <label>First Name</label>
+                <input class="form-control" id="name" type="text" name="name" placeholder="Name" required>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>Mobile No</label>
+                <input class="form-control" type="text" id="phone" name="phone" placeholder="Mobile No" required>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Address Line</label>
+                <input class="form-control" type="text" id="address" name="address" placeholder="Address" required>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>District</label>
+                <input class="form-control" type="text" id="district" name="district" placeholder="District" required>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>town</label>
+                <input class="form-control" id="town" type="text" name="town" placeholder="" required>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>State</label>
+                <input class="form-control" id="state" type="text" name="state" placeholder="" required>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>PIN Code</label>
+                <input class="form-control" type="text" id="pincode" name="pincode" placeholder="" required>
+            </div>
+            <div>
+                <input type="text" name="user_id" id="" value="{{user._id}}" hidden>
+            </div>
+            <button type="submit" class="btn btn-block btn-primary font-weight-bold py-3">Add Address</button>
+        </div>
+        </form>
+    </div>
+</div>
+</div>

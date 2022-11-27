@@ -1,0 +1,215 @@
+<!-- Carousel Start -->
+<div class="container-fluid mb-3">
+    <div class="row px-xl-5">
+        <div class="col-lg-8">
+            <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    {{!-- <li data-target="#header-carousel" data-slide-to="0" class="active"></li> --}}
+                    {{#each banners}}
+                    <li data-target="#header-carousel" data-slide-to="{{@index}}" class="{{this.slide}}"></li>
+                    {{/each}}
+                    {{!-- <li data-target="#header-carousel" data-slide-to="2"></li> --}}
+                </ol>
+                <div class="carousel-inner">
+                    {{#each banners}}
+                    <div class="carousel-item position-relative {{this.slide}}" style="height: 430px;">
+                        <img class="position-absolute w-100 h-100" src="/banner-images/{{this._id}}.jpg"
+                            style="object-fit: cover;">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div class="p-3" style="max-width: 700px;">
+                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">
+                                    {{this.name}}
+                                </h1>
+                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">{{this.subname}}</p>
+                                <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                                    href="/shop">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="product-offer mb-30" style="height: 200px;">
+                <img class="img-fluid" src="images/banner2.jpeg" alt="">
+                <div class="offer-text">
+                    <h6 class="text-white text-uppercase">Save 12%</h6>
+                    <h3 class="text-white mb-3">Special Offer</h3>
+                    <a href="" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp">Shop
+                        Now</a>
+                </div>
+            </div>
+            <div class="product-offer mb-30" style="height: 200px;">
+                <img class="img-fluid" src="images/side-banner1.jpeg" alt="">
+                <div class="offer-text">
+                    <h6 class="text-white text-uppercase">Save 25%</h6>
+                    <h3 class="text-white mb-3">Special Offer</h3>
+                    <a href="" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp">Shop
+                        Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Carousel End -->
+
+
+<!-- Featured Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center mb-4" style="padding: 30px; background-color: black;">
+                <h1 class="fa fa-check text-success m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0 text-light">Quality Product</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center mb-4" style="padding: 30px; background-color: black;">
+                <h1 class="fa fa-shipping-fast text-warning m-0 mr-2"></h1>
+                <h5 class="font-weight-semi-bold m-0 text-light">Free Shipping</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center  mb-4" style="padding: 30px; background-color: black;">
+                <h1 class="fas fa-exchange-alt text-info m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0 text-light">14-Day Return</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center mb-4" style="padding: 30px; background-color: black;">
+                <h1 class="fa fa-phone-volume text-light m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0 text-light">24/7 Support</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Featured End -->
+
+
+<!-- Categories Start -->
+{{!-- <div class="container-fluid pt-5">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
+            class="bg-dark text-light pr-3">Categories</span></h2>
+    <div class="row px-xl-5 pb-3">
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+            <a class="text-decoration-none" href="/men">
+                <div class="cat-item d-flex align-items-center mb-4">
+                    <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                        <img class="img-fluid" src="images/men.jpeg" alt="">
+                    </div>
+                    <div class="flex-fill pl-3">
+                        <h6>Men</h6>
+                        <small class="text-body">100 Products</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+            <a class="text-decoration-none" href="/women">
+                <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                    <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                        <img class="img-fluid" src="images/women.jpeg" alt="">
+                    </div>
+                    <div class="flex-fill pl-3">
+                        <h6>women</h6>
+                        <small class="text-body">100 Products</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div> --}}
+<!-- Categories End -->
+
+
+<!-- Products Start -->
+<div class="container-fluid pt-5 pb-3">
+    <h2 id="featured" class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
+            class="bg-secondary pr-3">Featured
+            Products</span></h2>
+    <div class="row px-xl-5">
+        {{#each products}}
+
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+            <div class="product-item bg-light mb-4">
+                <div class="product-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src="product-images/{{this._id}}.jpg" alt="">
+                    <div class="product-action">
+                        <a class="btn btn-outline-dark btn-square" onclick="addToCart('{{this._id}}')"><i
+                                class="fa fa-shopping-cart"></i></a>
+                        <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                        <a class="btn btn-outline-dark btn-square" href="/view-product/{{this._id}}"><i
+                                class="fa fa-eye"></i></a>
+                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                    </div>
+                </div>
+                <div class="text-center py-4"  >
+                    <a class="h6 text-decoration-none text-truncate" href="">{{this.name}}</a>
+                    {{#if this.noStock}}
+                    <div class="text-danger font-weight-bold">Out of Stock</div>
+                    {{/if}}
+                    {{#if this.fewStock}}
+                    <h5 class="text-warning font-weight-bold">Only few left</h5>
+                    {{/if}}
+                    <div class="d-flex align-items-center justify-content-center mt-2">
+                        {{#if this.catOfferPercentage}}
+                        <h5>{{this.price}}</h5>
+                        <h6 class="text-muted ml-2"><del>{{this.actualPrice}}</del></h6>&nbsp; &nbsp;
+                        <span
+                            class="offer bg-info text-light rounded-circle border border-info">{{this.catOfferPercentage}}%</span>
+                        {{else}}
+                        <h5>{{this.price}}</h5> &nbsp; &nbsp;
+                        {{/if}}
+
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center mb-1">
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small>(99)</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<!-- Products End -->
+
+
+<!-- Offer Start -->
+<div class="container-fluid pt-5 pb-3">
+    <div class="row px-xl-5">
+        <div class="col-md-6">
+            <div class="product-offer mb-30" style="height: 300px;">
+                <img class="img-fluid" src="images/banner1.jpeg" alt="">
+                <div class="offer-text">
+                    <h6 class="text-white text-uppercase">Save 20%</h6>
+                    <h3 class="text-white mb-3">Special Offer</h3>
+                    <a href="" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp">Shop
+                        Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="product-offer mb-30" style="height: 300px;">
+                <img class="img-fluid" src="images/side-banner2.jpeg" alt="">
+                <div class="offer-text">
+                    <h6 class="text-white text-uppercase">Save 20%</h6>
+                    <h3 class="text-white mb-3">Special Offer</h3>
+                    <a href="" class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp ">Shop
+                        Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Offer End -->
+
+<!-- Products Start -->
+<!-- Products End -->
+<!-- Back to Top -->
+<a href="#" class="btn btn-info back-to-top"><i class="fa fa-angle-double-up"></i></a>

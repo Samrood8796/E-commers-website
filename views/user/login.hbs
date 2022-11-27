@@ -1,0 +1,74 @@
+<section>
+  <style>
+    .group {
+      display: table;
+      width: 100%;
+    }
+
+    .item {
+      display: table-cell;
+    }
+
+    .text {
+      white-space: nowrap;
+      width: 1%;
+      padding: 0 10px;
+    }
+
+    .line {
+      border-bottom: 1px solid #000;
+      position: relative;
+      top: -.5em;
+    }
+  </style>
+  <div class="container mt-5 ">
+    <div class="row justify-content-center ">
+      <div class="card col-md-4 p-b-55 border rounded" style="background-color:#fff;">
+
+        <div>
+          <h2 class="text-dark text-center mt-2">Login</h2>
+        </div>
+        {{#if blockErr}}
+        <p class="error text-danger">{{blockErr}}</p>
+        {{/if}}
+
+        {{#if passwordErr}}
+        <p class="error text-danger">{{passwordErr}}</p>
+        {{/if}}
+
+        {{#if noUserErr}}
+        <p class="error text-danger">{{noUserErr}}</p>
+        {{/if}}
+
+        <form action="/login" method="post" id="login">
+          <div class="form-group">
+            <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" >
+          </div>
+          <div class="form-group mb-4">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" >
+          </div>
+
+           <div class="group mb-4">
+          <div class="item line"></div>
+          <div class="item text text-dark font-weight-bold">new to this? &nbsp;<a href="/signup">Signup</a>
+          </div>
+          <div class="item line"></div>
+        </div>
+
+          <div class="justify-content-center d-flex mb-3">
+            <button type="submit" class="btn btn-dark w-100">Submit</button>
+          </div>
+        </form>
+
+        <div class="group mb-4">
+          <div class="item line"></div>
+          <div class="item text text-dark font-weight-bold">Login With OTP &nbsp;<a href="/otp-login">Otp Login</a>
+          </div>
+          <div class="item line"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,35 @@
+<body style="background-image: url('/img/fogg.jpg');">
+
+    <section>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="card col-md-4" style="background-color:#fff;">
+
+                    <div>
+                        <h2 class="text-dark text-center mt-2">OTP Login</h2>
+                    </div>
+                    {{#if blockErr}}
+                    <p class="error text-danger">{{blockErr}}</p>
+                    {{/if}}
+
+                    {{#if noUserErr}}
+                    <p class="error text-danger">{{noUserErr}}</p>
+                    {{/if}}
+
+                    <form action="/otp-login" method="post" id="mobileOtp">
+                        <div>
+                            <div class="form-group mb-4">
+                                <input type="tel" class="form-control" name="phone" id="mobile"
+                                    placeholder="Enter Mobile number" >
+                            </div>
+
+                            <div class="justify-content-center d-flex mb-3">
+                                <button type="submit" class="btn btn-dark w-100">Submit</button>
+                            </div>
+                    </form>
+                </div class="mb-5">
+            </div>
+        </div>
+    </section>
+
+</body>

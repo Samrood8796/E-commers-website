@@ -1,0 +1,35 @@
+<body style="background-image: url('/img/fogg.jpg');">
+
+    <section>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-4" style="background-color:#fff;">
+
+                    <div>
+                        <h2 class=" text-center mt-2" style="color:rgb(0, 0, 0);">OTP </h2>
+                    </div>
+                    {{#if otpErr}}
+                    <p class="error text-danger">{{otpErr}}</p>
+                    {{/if}}
+                    <form action="/enter-otp" method="post" otp>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" name="otp" id="mobile" placeholder="Enter otp">
+                        </div>
+                        <div class="form-outline">
+                            <input type="tel" value="{{phone}}" name="phone" id="form2Example27"
+                                class="d-none form-control form-control-lg" />
+                            <label class="form-label" for="form2Example27"></label>
+                        </div>
+                        <div class="">
+                            <button type="submit" class="btn btn-dark w-100 mb-30">Send OTP</button>
+                        </div>
+
+                    </form>
+
+
+                </div class="mb-5">
+            </div>
+        </div>
+    </section>
+
+</body>

@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row px-xl-5 ">
+        <div class=" table-responsive ">
+                <div class="justify-content-end d-flex mt-5">
+                    <a class="btn btn-info " href="/admin/sales-report">Sales Report</a>
+                </div>
+                <table class="table  text-center mt-2">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>No</th>
+                            <th>Date</th>
+                            <th>products</th>
+                            <th>customer</th>
+                            <th>Amount</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    {{#each allOrders}}
+                    <tbody class="align-middle">
+                        <tr>
+                            <td class="align-middle">{{inc @index}}</td>
+                            <td class="align-middle">{{this.date}}</td>
+                            <td class="align-middle"><a href="/admin/view-order-products/{{this._id}}"><i
+                                        class="fa fa-eye fa-2x" aria-hidden="true"></a></td>
+                            <td class="align-middle">{{this.deliverydetails.firstName}}</td>
+                            <td class="align-middle">{{this.totalAmount}}</td>
+                            <td class="align-middle ">{{this.paymentMethod}}</td>
+                            <td class="align-middle">{{this.status}}</td>
+                            <td>
+                                {{#if this.is_Cancelled}}
+                                <p class="text-danger font-weight-bold text-center">Cancelled Successfully</p>
+                                {{else}}
+                                {{#if this.is_delivered}}
+                                <p class="text-success font-weight-bold text-center">Delivered Successfully</p>
+                                {{else}}
+                                <form action="/admin/change-order-status" method="post">
+                                    <input type="text" name="OrderId" value="{{this._id}}" hidden>
+                                    <select name="status" class="form-select " aria-label="Default select example">
+                                        <option selected>select status</option>
+                                        <option value="Shipped">shipped</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                        <option value="Placed">placed</option>
+                                        <option value="Pending">Pending</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-dark">Submit</button>
+                                </form>
+                                {{/if}}
+                                {{/if}}
+                            </td>
+                        </tr>
+                        {{/each}}
+
+
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
