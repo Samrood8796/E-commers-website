@@ -1,7 +1,4 @@
 var express = require('express');
-const { Db } = require('mongodb');
-const { response } = require('../app');
-const adminHelpers = require('../helpers/admin-helpers');
 var router = express.Router();
 var producthelpers = require('../helpers/product-helpers')
 var userhelpers = require('../helpers/user-helpers')
