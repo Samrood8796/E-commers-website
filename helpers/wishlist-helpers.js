@@ -92,6 +92,7 @@ module.exports = {
     //wishlist count
     getWishlistCount: (userId) => {
         return new Promise(async (resolve, reject) => {
+            try{
             let count = 0;
             let wishlist = await db.get().collection(collection.WISHLIST_COLLECTON).findOne({ user: objectId(userId) })
             if (wishlist) {
@@ -100,6 +101,10 @@ module.exports = {
             } else {
                 resolve(count)
             }
+        }catch(err){
+            console.log("error"+err);
+            resolve(0)
+        }
         })
     }
 }

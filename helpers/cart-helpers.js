@@ -54,7 +54,8 @@ module.exports = {
             } else {
                 resolve(count)
             }
-        }catch{
+        }catch(err){
+            console.log("error:"+err);
             resolve(0)
         }
         })

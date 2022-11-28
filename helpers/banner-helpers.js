@@ -7,9 +7,14 @@ module.exports = {
     // get all banners
     getAllBanners: () => {
         return new Promise((resolve, reject) => {
+            try{
             let allBanners = db.get().collection(collection.BANNER_COLLECTION).find().toArray()
             resolve(allBanners)
+            }catch{
+                resolve(0)
+            }
         })
+    
     },
 
     // add banner

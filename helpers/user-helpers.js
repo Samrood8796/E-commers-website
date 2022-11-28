@@ -27,7 +27,7 @@ paypal.configure({
 
 module.exports = {
     // signup
-    dosignup: (userData) => {
+    dosignup: (userData) => {     
         return new Promise(async (resolve, reject) => {
             let response = {}
             let user = await db.get().collection(collection.USER_COLLECTION).findOne({ email: userData.email })
