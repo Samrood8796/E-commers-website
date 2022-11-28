@@ -136,7 +136,7 @@ router.get('/edit-product/:id', verifyAdminLogin, (req, res) => {
 router.post('/edit-product/:id', verifyAdminLogin, (req, res) => {
   id = req.params.id
   producthelpers.updateProduct(req.params.id, req.body).then(() => {
-    res.redirect('/admin/product-management')
+    try{
     if (req.files.image) {
       let image = req.files.image
       image.mv('./public/product-images/' + id + '.jpg')
@@ -153,6 +153,11 @@ router.post('/edit-product/:id', verifyAdminLogin, (req, res) => {
       let image3 = req.files.image3
       image3.mv('./public/product-images/' + id + '3.jpg')
     }
+    res.redirect('/admin/product-management')
+
+  }catch{
+    res.redirect('/admin/product-management')
+  }
   })
 })
 

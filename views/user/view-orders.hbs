@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 {{#each orderData}}
-                <tbody class="align-middle bg-light">
+                <tbody class="align-middle">
                     <tr>
                         <td>{{inc @index}}</td>
                         <td class="align-middle">{{this.date}}</td>
@@ -54,6 +54,7 @@
                         </td>
                         {{else}}
                         {{#if this.is_delivered}}
+                        
                         {{#if this.is_returned}}
                         <td class="align-middle">
                             <p class="text-warning font-weight-bold">Returned Successfully</p>

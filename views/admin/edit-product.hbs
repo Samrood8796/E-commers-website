@@ -173,61 +173,7 @@
         return true;
     }
 
-    function validateImage() {
-        var images = document.getElementById('myFile1').value.trim();
-
-        if (images.length == 0) {
-            imageError.innerHTML = 'Select an image';
-            imageError.style.color = 'red'
-            return false;
-        }
-        imageError.innerHTML = 'valid';
-        imageError.style.color = 'green'
-        return true;
-
-    }
-
-    function validateImage1() {
-        var images2 = document.getElementById('image1').value.trim();
-
-        if (images2.length == 0) {
-            imageError2.innerHTML = 'Select an image';
-            imageError2.style.color = 'red'
-            return false;
-        }
-        imageError2.innerHTML = 'valid';
-        imageError2.style.color = 'green'
-        return true;
-
-    }
-
-    function validateImage2() {
-        var images3 = document.getElementById('image2').value.trim();
-
-        if (images3.length == 0) {
-            imageError3.innerHTML = 'Select an image';
-            imageError3.style.color = 'red'
-            return false;
-        }
-        imageError3.innerHTML = 'valid';
-        imageError3.style.color = 'green'
-        return true;
-
-    }
-
-    function validateImage3() {
-        var images4 = document.getElementById('image3').value.trim();
-
-        if (images4.length == 0) {
-            imageError4.innerHTML = 'Select an image';
-            imageError4.style.color = 'red'
-            return false;
-        }
-        imageError4.innerHTML = 'valid';
-        imageError4.style.color = 'green'
-        return true;
-
-    }
+    
 
 
 
@@ -236,11 +182,8 @@
         validatePrice()
         validateDescription()
         validateStock()
-        validateImage()
-        validateImage1()
-        validateImage2()
-        validateImage3()
-        if (validateName() && validatePrice() && validateDescription() && validateImage() && validateImage1() && validateImage2() && validateImage3() &&  validateStock()) {
+       
+        if (validateName() && validatePrice() && validateDescription() &&  validateStock()) {
             alert('Product edited successfully')
         } else {
             e.preventDefault();
