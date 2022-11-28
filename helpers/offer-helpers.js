@@ -155,12 +155,14 @@ module.exports = {
                                     }
                                 })
                             })
+                        }else{
+                            resolve(0)
                         }
                     })
                     resolve()
 
                 } else {
-                    resolve()
+                    resolve(0)
                 }
             } catch {
                 resolve(0)

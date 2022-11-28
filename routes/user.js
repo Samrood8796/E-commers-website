@@ -62,7 +62,7 @@ router.get('/', async (req, res, next) => {
       cartCount = await carthelpers.getCartCount(user._id)
     }
     res.render('user/index', { products, user, cartCount, wishCount, banners })
-  } catch (err) {
+  } catch{
     res.redirect('/')
   }
 
