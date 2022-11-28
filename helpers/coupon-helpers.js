@@ -156,7 +156,7 @@ module.exports = {
                 resolve()
             }
         }catch{
-            console.log('catched err');
+            
             resolve(0)
         }
         })

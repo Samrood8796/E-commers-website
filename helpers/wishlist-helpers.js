@@ -100,8 +100,7 @@ module.exports = {
             } else {
                 resolve(count)
             }
-        }catch(err){
-            console.log("error"+err);
+        }catch{
             resolve(0)
         }
         })
