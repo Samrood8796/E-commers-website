@@ -1,6 +1,5 @@
 var db = require('../config/connection')
 var collection = require('../config/collections')
-const { DeactivationsList } = require('twilio/lib/rest/messaging/v1/deactivation')
 var objectId = require('mongodb').ObjectId
 
 module.exports = {

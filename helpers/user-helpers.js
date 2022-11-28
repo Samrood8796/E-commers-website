@@ -1,15 +1,9 @@
 var db = require('../config/connection')
 var collection = require('../config/collections')
 var bcrypt = require('bcrypt')
-const { USER_COLLECTION } = require('../config/collections')
 const ObjectId = require('mongodb').ObjectId
-const { TrustProductsEntityAssignmentsContext } = require('twilio/lib/rest/trusthub/v1/trustProducts/trustProductsEntityAssignments')
-const productHelpers = require('./product-helpers')
-const { DeactivationsList } = require('twilio/lib/rest/messaging/v1/deactivation')
 const Razorpay = require('razorpay');
-const { resolve } = require('path')
 const paypal = require('paypal-rest-sdk')
-const { resolveObjectURL } = require('buffer')
 const moment = require('moment')
 let referralCodeGenerator = require('referral-code-generator')
 
