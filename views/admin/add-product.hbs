@@ -323,10 +323,9 @@
         validateImage3()
         validateImage4()
         if (validateName() && validatePrice() && validateDescription() && validateImage() && validateImage2() && validateImage3() && validateImage4() && validateStock()) {
-            alert('Product Added')
         } else {
             e.preventDefault();
-            alert('Invalid data!');
+         //   alert('Invalid data!');
             return false;
         }
     });

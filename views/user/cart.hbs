@@ -176,6 +176,16 @@
                         location.reload()
                     })
                 }
+                else if (response.limitStock) {
+                    swal.fire(
+                        {
+                            icon: "error",
+                            text: "limit is reached"
+                        }
+                    ).then(() => {
+                        location.reload()
+                    })
+                }
                 else {
                     document.getElementById(proId).value = quantity + count
                     document.getElementById('total').innerHTML = response.total

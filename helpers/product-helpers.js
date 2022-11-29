@@ -40,7 +40,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             try{
             db.get().collection(collection.PRODUCT_COLLECTION).deleteOne({ _id: objectId(prodId) }).then((response) => {
-                resolve(response)
+                resolve()
             })
         }catch{
             resolve(0)
@@ -84,7 +84,7 @@ module.exports = {
                 if (response) {
                     resolve({ status: false })
                 } else {
-                    db.get().collection(collection.CATEGORY_COLLECTION).insertOne(catData).then((response) => {
+                    db.get().collection(collection.CATEGORY_COLLECTION).insertOne(catData).then(() => {
                         resolve({ status: true })
                     })
                 }

@@ -16,7 +16,7 @@
 <div class="container-fluid">
     <div class="row px-xl-5">
         <!-- Shop Product Start -->
-        <div class="col-lg-9 col-md-8">
+        <div class="container-fluid col-lg-10 col-md-8">
             <div class="row pb-3">
                 <div class="col-12 pb-1">
                     <div class="d-flex align-items-center justify-content-between mb-4">
@@ -32,7 +32,6 @@
                                     <a class="dropdown-item" href="/shop">Best Rating</a>
                                     <a class="dropdown-item" href="/men">Men</a>
                                     <a class="dropdown-item" href="/women">Women</a>
-                                    </form>
                                 </div>
                             </div>
                             {{!-- <div class="btn-group ml-2">
@@ -48,7 +47,7 @@
                     </div>
                 </div>
                 {{#each products}}
-                <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                <div class="col-lg-3 col-md-6 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="product-images/{{this._id}}.jpg" alt="">
@@ -85,4 +84,7 @@
                     </div>
                 </div>
                 {{/each}}
-            </div></div></div></div>
+            </div>
+        </div>
+    </div>
+</div>

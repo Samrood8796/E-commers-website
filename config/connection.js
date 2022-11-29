@@ -3,7 +3,6 @@ const state = {
     db: null
 }
 module.exports.connect = function (done) {
-    console.log(process.env.URL)
     const url = process.env.URL
     const dbname = 'shopping'
 
@@ -12,7 +11,7 @@ module.exports.connect = function (done) {
         state.db = data.db(dbname)
         done()
     })
-}  
-module.exports.get = function () {
+}     
+module.exports.get = function () {       
     return state.db
 }

@@ -22,6 +22,13 @@ function addToCart(proId) {
                     text:'Sold out'
                 })
             }
+            else if(response.limitStock){
+                
+                swal.fire({
+                    icon:'error',
+                    text:'limit is reached'
+                })
+            }
             else{
                 location.href='/login'
             }

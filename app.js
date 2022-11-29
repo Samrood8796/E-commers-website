@@ -39,17 +39,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload())
 
-app.use(session({secret:"key",resave:false,saveUninitialized:false, cookie:{maxAge:600000}}))
+app.use(session({secret:"key",resave:false,saveUninitialized:false, cookie:{maxAge:6000000}}))
 
 db.connect((err)=>{
-  if(err) console.log('Connection Error');
+  if(err) console.log('Connection Error'+err);
   else console.log('Database Connected');
 })
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function(req, res, next) { 
   next(createError(404));
 });
 
@@ -60,7 +60,7 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
+  res.status(err.status || 500);  
   res.render('error');
 });
 

@@ -164,7 +164,7 @@ router.post('/edit-product/:id', verifyAdminLogin, (req, res) => {
 // delete product
 router.get('/delete-product/:id', verifyAdminLogin, (req, res) => {
   let id = req.params.id
-  producthelpers.deleteProduct(id).then((response) => {
+  producthelpers.deleteProduct(id).then(() => {
     res.redirect('/admin/product-management')
     fs.unlinkSync('public/product-images/' + id +'.jpg')
     fs.unlinkSync('public/product-images/' + id +'1.jpg')
@@ -209,7 +209,7 @@ router.post('/add-category', verifyAdminLogin, (req, res) => {
 })
 
 // edit category
-router.get('/edit-category/:id', verifyAdminLogin, (req, res) => {
+router.get('/edit-category/:id', verifyAdminLogin, (req, res) => {   
   let admin = req.session.admin
   producthelpers.getCategory(req.params.id).then((cate) => {
     res.render('admin/edit-category', { cate, "catEditErr": req.session.catEditErr, admin })

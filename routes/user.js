@@ -143,7 +143,7 @@ router.get('/shop', async (req, res) => {
   products.forEach((element) => {
     if (element.stock < 10 && element.stock != 0) {
       element.fewStock = true
-    } else if (element.stock == 0) {
+    } else if (element.stock == 0) {   
       element.noStock = true
     }
   })
@@ -255,7 +255,10 @@ router.get('/add-to-cart/:id', async (req, res) => {
     let proId = req.params.id
     let stock = await producthelpers.getStock(proId)
     let proquantity = await carthelpers.findCartQuantity(userId, proId)
-    if (stock <= proquantity) {
+    if(proquantity == 3){
+      res.json({limitStock:true})
+    }
+    else if (stock <= proquantity) {
       res.json({ noStock: true })
     } else if (stock == 0) {
       res.json({ noStock: true })
@@ -275,6 +278,12 @@ router.get('/add-to-cart/:id', async (req, res) => {
 router.post('/change-product-quantity', veryfilogin, async (req, res) => {
   let userId = req.body.user;
   let proId = req.body.product;
+  count = req.body.count
+  let proquantity = await carthelpers.findCartQuantity(userId, proId)
+  console.log(proquantity);
+  if(proquantity == 3 && count == 1){
+    res.json({limitStock:true})
+  }else{
   carthelpers.changeProductQuantity(req.body).then(async (response) => {
     response.total = await carthelpers.getTottalAmount(userId)
     response.cartSubTotal = await carthelpers.getCartSubTotal(userId, proId)
@@ -282,6 +291,7 @@ router.post('/change-product-quantity', veryfilogin, async (req, res) => {
   }).catch(() => {
     res.json({ noStock: true })
   })
+}
 })
 
 // delete cart item
@@ -383,7 +393,6 @@ router.get('/view-order-products/:id', async (req, res) => {
   let track = await userhelpers.statusTrack(req.params.id)
   let orders = await userhelpers.getOrder(req.params.id)
   console.log('--------------------------------------------');
-
   console.log(track)
   res.render('user/status-track', { user, products, track, orders })
 })

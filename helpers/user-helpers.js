@@ -273,7 +273,16 @@ module.exports = {
 
     // cancel order
     cancelOrder: (id) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async(resolve, reject) => {
+            let order =await db.get().collection(collection.ORDER_COLLECTION).findOne({_id: ObjectId(id)})
+            if(order.paymentMethod === "wallet" || order.paymentMethod === "Razorpay" || order.paymentMethod ==="paypal"){
+                db.get().collection(collection.USER_COLLECTION).updateOne({_id:ObjectId(order.userId)},
+                {
+                    $inc:{
+                        wallet :order.totalAmount
+                    }
+                })
+            }
             db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: ObjectId(id) },
                 {
                     $set: {
@@ -506,14 +515,10 @@ module.exports = {
     returnOrder: (id) => {
         return new Promise(async (resolve, reject) => {
             let order = await db.get().collection(collection.ORDER_COLLECTION).findOne({ _id: ObjectId(id) })
-            let user = await db.get().collection(collection.USER_COLLECTION).findOne({ _id: ObjectId(order.userId) })
-            if (user.wallet == 0 || user.wallet) {
-                user.wallet = parseInt(user.wallet + order.totalAmount)
-            }
             db.get().collection(collection.USER_COLLECTION).updateOne({ _id: ObjectId(order.userId) },
                 {
-                    $set: {
-                        wallet: user.wallet
+                    $inc: {
+                        wallet: order.totalAmount
                     }
                 }).then(() => {
                     db.get().collection(collection.ORDER_COLLECTION).updateOne({ _id: ObjectId(id) },
@@ -524,7 +529,6 @@ module.exports = {
                                 returnedDate : new Date()
                             }
                         })
-
                 })
             resolve()
         })
