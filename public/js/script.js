@@ -55,7 +55,10 @@ function addTowishlist(proId) {
                     timer: 1000
                 })
 
-            }else{
+            }else if (response.login){
+                location.href = "/login"
+            }
+            else{
                 let count = $('#wish-count').html()
                 count = parseInt(count) - 1
                 $('#wish-count').html(count)

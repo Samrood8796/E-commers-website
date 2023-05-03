@@ -211,14 +211,13 @@ module.exports = {
                 for (i = 0; i < orders.length; i++) {
                     orders[i].date = moment(orders[i].date).format('lll');
                 }
-
                 resolve(orders)
             } else {
                 resolve(0)
             }
         })
     },
-
+    
     // ordered product details
     getOrderProducts: (orderId) => {
         return new Promise(async (resolve, reject) => {
@@ -421,9 +420,7 @@ module.exports = {
     },
 
     updateUserData: (userData) => {
-
         return new Promise(async (resolve, reject) => {
-
             db.get().collection(collection.USER_COLLECTION).updateOne({ _id: ObjectId(userData._id) },
                 {
                     $set: {
@@ -463,6 +460,7 @@ module.exports = {
                 })
         })
     },
+
     //edit address
     editAddress: (data, userId) => {
         if (data.id != '' && data.name != '' && data.address != '' && data.town != '' && data.district != '' && data.state != '' && data.pincode != '' && data.phone != '') {
@@ -483,7 +481,6 @@ module.exports = {
             reject()
         }
     },
-
 
     changePassword: (userId, data) => {
         return new Promise(async (resolve, reject) => {

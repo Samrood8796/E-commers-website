@@ -65,7 +65,7 @@
         <div class="col-lg-4 col-6 text-left">
             <form action="">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products">
+                    <input type="text" id="search" onchange="Search()" class="form-control" placeholder="Search for products">
                     <div class="input-group-append">
                         <span class="input-group-text text-primary" style="background-color: black;">
                             <i class="fa fa-search text-light "></i>
@@ -156,5 +156,31 @@
         </div>
     </div>
 </div>
+{{!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> --}}
+
+{{!-- <script>
+    
+    
+
+
+    //function Search() {
+   // let value = document.getElementById('search').value.trim();
+
+    //console.log('searching called')
+    //$.ajax({
+      //  url: `/searching/${value}`,
+       // method: 'get',
+        //success: (response) => {
+            
+          //  document.getElementById()
+        //}
+    //})
+//}
+
+
+
+
+               
+//</script> --}}
 {{/if}}
 <!-- Navbar End -->

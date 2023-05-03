@@ -162,6 +162,7 @@ router.get('/otp-login', (req, res) => {
 // otp login post
 router.post('/otp-login', (req, res) => {
   userhelpers.checkMobile(req.body).then((response) => {
+    try{
     if (response.blocked) {
       req.session.blockErr = "user is temporarily blocked"
       res.redirect('/otp-login')
@@ -173,15 +174,18 @@ router.post('/otp-login', (req, res) => {
       client.verify
         .services(servicesID)
         .verifications.create({ to: `+91${req.body.phone}`, channel: "sms" })
-        .then((response) => {
+        .then(() => {
           res.render('user/enter-otp', { phone })
         })
     }
+  }catch{
+    res.render('/otp-login')
+  }
   })
 })
 
 // otp code getting
-router.get('/enter-otp', (req, res) => {
+router.get('/enter-otp', (req, res) => { 
   let otpErr = req.session.invalidOtpErr
   res.render('user/enter-otp', { otpErr })
   req.session.invalidOtpErr = false
@@ -189,6 +193,7 @@ router.get('/enter-otp', (req, res) => {
 
 // otp verifying post
 router.post('/enter-otp', (req, res) => {
+  try{
   let otp = req.body.otp
   let phone = req.body.phone
   client.verify
@@ -207,6 +212,9 @@ router.post('/enter-otp', (req, res) => {
         res.redirect('/enter-otp')
       }
     });
+  }catch{
+    res.redirect('/otp-login')
+  }
 })
 
 // view one product details
@@ -309,7 +317,7 @@ router.get('/place-order', veryfilogin, async (req, res) => {
   let cartProduct = await carthelpers.getCartProducts(user._id)
   let totalValue = await carthelpers.getTottalAmount(req.session.user._id)
   let show_Wallet = false;
-  if (user.wallet >= totalValue) {
+  if (user.wallet >= totalValue) {        
     show_Wallet = true
   }
   res.render('user/place-order', { totalValue, user, cartProduct, show_Wallet })
@@ -529,8 +537,9 @@ router.get('/women', async (req, res) => {
   res.render('user/women', { products, user, cartCount, wishCount })
 })
 
-// add wishlist
+// add to wishlist
 router.get('/add-to-wishlist/:proId', (req, res) => {
+  if(req.session.userLoggedIn){
   let proId = req.params.proId
   let userId = req.session.user._id
   wishlisthelpers.addToWishlist(proId, userId).then(() => {
@@ -538,6 +547,9 @@ router.get('/add-to-wishlist/:proId', (req, res) => {
   }).catch(() => {
     res.json({ status: false })
   })
+}else{
+  res.json({login:true})
+}
 })
 
 // wishlist get
@@ -588,6 +600,13 @@ router.get('/logout', (req, res) => {
   req.session.userLoggedIn = false
   res.redirect('/')
 })
+
+// router.get('/searching/:val',(req,res)=>{
+//   console.log(req.params.val);
+//   producthelpers.searchProducts(req.params.val).then((response)=>{
+//     res.json({response})
+//   })
+// })
 module.exports = router;
 
 

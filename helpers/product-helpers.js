@@ -1,5 +1,6 @@
 var db = require('../config/connection')
-var collection = require('../config/collections')
+var collection = require('../config/collections');
+const { resolve } = require('path');
 var objectId = require('mongodb').ObjectId
 module.exports = {
    
@@ -144,6 +145,16 @@ module.exports = {
                 reaolve(response.stock)
             })
         })
-    }
+    },
+
+    // searchProducts:(val)=>{
+
+    //     return new Promise((resolve,reject)=>{
+    //         db.get().collection(collection.PRODUCT_COLLECTION).find({name:{$regex:`^${val}`}}).toArray().then((response)=>{
+    //             console.log(response);
+    //             resolve(response.name)
+    //         })
+    //     })
+    // }
 
 }
