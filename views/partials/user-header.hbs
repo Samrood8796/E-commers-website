@@ -63,16 +63,18 @@
             </a>
         </div>
         <div class="col-lg-4 col-6 text-left">
-            <form action="">
+            {{!-- <form action=""> --}}
                 <div class="input-group">
-                    <input type="text" id="search" onchange="Search()" class="form-control" placeholder="Search for products">
+                    <input type="text" id="searchBox" onkeyup="search()" class="form-control" placeholder="Search for products">
                     <div class="input-group-append">
                         <span class="input-group-text text-primary" style="background-color: black;">
                             <i class="fa fa-search text-light "></i>
                         </span>
                     </div>
                 </div>
-            </form>
+                <div class="col-10" id="drop" style="background-color: white; color: black; position: absolute; z-index: 10;">
+                </div>
+            {{!-- </form> --}}
         </div>
         <div class="col-lg-4 col-6 text-right">
             <p class="m-0 text-light">Customer Service</p>

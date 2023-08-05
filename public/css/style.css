@@ -6327,7 +6327,7 @@ button.bg-dark:focus {
 }
 
 .d-none {
-  display: none !important;
+  display: none;
 }
 
 .d-inline {
@@ -9635,6 +9635,8 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .product-item {
+  /* box-sizing: border-box; */
+  /* height: 27rem; */
   transition: .5s;
 }
 
@@ -9728,4 +9730,7 @@ a.text-dark:hover, a.text-dark:focus {
   100% {
     transform: translateY(-15px);
   }
+}
+.box-border{
+  box-sizing: border-box;
 }

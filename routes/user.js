@@ -62,7 +62,7 @@ router.get('/', async (req, res, next) => {
       cartCount = await carthelpers.getCartCount(user._id)
     }
     res.render('user/index', { products, user, cartCount, wishCount, banners })
-  } catch{
+  } catch {
     res.redirect('/')
   }
 
@@ -140,10 +140,10 @@ router.get('/shop', async (req, res) => {
     cartCount = await carthelpers.getCartCount(user._id)
   }
   let products = await producthelpers.getAllProducts()
-  products.forEach((element) => {
+  products && products.forEach((element) => {
     if (element.stock < 10 && element.stock != 0) {
       element.fewStock = true
-    } else if (element.stock == 0) {   
+    } else if (element.stock == 0) {
       element.noStock = true
     }
   })
@@ -154,7 +154,7 @@ router.get('/shop', async (req, res) => {
 router.get('/otp-login', (req, res) => {
   let noUserErr = req.session.noUserErr
   let blockErr = req.session.blockErr
-  res.render('user/otp-login', { noUserErr, blockErr ,validation:true})
+  res.render('user/otp-login', { noUserErr, blockErr, validation: true })
   req.session.noUserErr = false
   req.session.blockErr = false
 })
@@ -162,30 +162,30 @@ router.get('/otp-login', (req, res) => {
 // otp login post
 router.post('/otp-login', (req, res) => {
   userhelpers.checkMobile(req.body).then((response) => {
-    try{
-    if (response.blocked) {
-      req.session.blockErr = "user is temporarily blocked"
-      res.redirect('/otp-login')
-    } else if (response.noUser) {
-      req.session.noUserErr = "no user found please signup"
-      res.redirect('/otp-login')
-    } else {
-      let phone = response.phone
-      client.verify
-        .services(servicesID)
-        .verifications.create({ to: `+91${req.body.phone}`, channel: "sms" })
-        .then(() => {
-          res.render('user/enter-otp', { phone })
-        })
+    try {
+      if (response.blocked) {
+        req.session.blockErr = "user is temporarily blocked"
+        res.redirect('/otp-login')
+      } else if (response.noUser) {
+        req.session.noUserErr = "no user found please signup"
+        res.redirect('/otp-login')
+      } else {
+        let phone = response.phone
+        client.verify
+          .services(servicesID)
+          .verifications.create({ to: `+91${req.body.phone}`, channel: "sms" })
+          .then(() => {
+            res.render('user/enter-otp', { phone })
+          })
+      }
+    } catch {
+      res.render('/otp-login')
     }
-  }catch{
-    res.render('/otp-login')
-  }
   })
 })
 
 // otp code getting
-router.get('/enter-otp', (req, res) => { 
+router.get('/enter-otp', (req, res) => {
   let otpErr = req.session.invalidOtpErr
   res.render('user/enter-otp', { otpErr })
   req.session.invalidOtpErr = false
@@ -193,26 +193,26 @@ router.get('/enter-otp', (req, res) => {
 
 // otp verifying post
 router.post('/enter-otp', (req, res) => {
-  try{
-  let otp = req.body.otp
-  let phone = req.body.phone
-  client.verify
-    .services(servicesID)
-    .verificationChecks.create({ to: `+91${phone}`, code: otp })
-    .then((response) => {
-      let valid = response.valid
-      if (valid) {
-        userhelpers.userOtp(phone).then((response) => {
-          req.session.userLoggedIn = true;
-          req.session.user = response;
-          res.redirect('/')
-        })
-      } else {
-        req.session.invalidOtpErr = "invalid otp"
-        res.redirect('/enter-otp')
-      }
-    });
-  }catch{
+  try {
+    let otp = req.body.otp
+    let phone = req.body.phone
+    client.verify
+      .services(servicesID)
+      .verificationChecks.create({ to: `+91${phone}`, code: otp })
+      .then((response) => {
+        let valid = response.valid
+        if (valid) {
+          userhelpers.userOtp(phone).then((response) => {
+            req.session.userLoggedIn = true;
+            req.session.user = response;
+            res.redirect('/')
+          })
+        } else {
+          req.session.invalidOtpErr = "invalid otp"
+          res.redirect('/enter-otp')
+        }
+      });
+  } catch {
     res.redirect('/otp-login')
   }
 })
@@ -263,8 +263,8 @@ router.get('/add-to-cart/:id', async (req, res) => {
     let proId = req.params.id
     let stock = await producthelpers.getStock(proId)
     let proquantity = await carthelpers.findCartQuantity(userId, proId)
-    if(proquantity == 3){
-      res.json({limitStock:true})
+    if (proquantity == 3) {
+      res.json({ limitStock: true })
     }
     else if (stock <= proquantity) {
       res.json({ noStock: true })
@@ -289,17 +289,17 @@ router.post('/change-product-quantity', veryfilogin, async (req, res) => {
   count = req.body.count
   let proquantity = await carthelpers.findCartQuantity(userId, proId)
   console.log(proquantity);
-  if(proquantity == 3 && count == 1){
-    res.json({limitStock:true})
-  }else{
-  carthelpers.changeProductQuantity(req.body).then(async (response) => {
-    response.total = await carthelpers.getTottalAmount(userId)
-    response.cartSubTotal = await carthelpers.getCartSubTotal(userId, proId)
-    res.json(response)
-  }).catch(() => {
-    res.json({ noStock: true })
-  })
-}
+  if (proquantity == 3 && count == 1) {
+    res.json({ limitStock: true })
+  } else {
+    carthelpers.changeProductQuantity(req.body).then(async (response) => {
+      response.total = await carthelpers.getTottalAmount(userId)
+      response.cartSubTotal = await carthelpers.getCartSubTotal(userId, proId)
+      res.json(response)
+    }).catch(() => {
+      res.json({ noStock: true })
+    })
+  }
 })
 
 // delete cart item
@@ -317,7 +317,7 @@ router.get('/place-order', veryfilogin, async (req, res) => {
   let cartProduct = await carthelpers.getCartProducts(user._id)
   let totalValue = await carthelpers.getTottalAmount(req.session.user._id)
   let show_Wallet = false;
-  if (user.wallet >= totalValue) {        
+  if (user.wallet >= totalValue) {
     show_Wallet = true
   }
   res.render('user/place-order', { totalValue, user, cartProduct, show_Wallet })
@@ -539,17 +539,17 @@ router.get('/women', async (req, res) => {
 
 // add to wishlist
 router.get('/add-to-wishlist/:proId', (req, res) => {
-  if(req.session.userLoggedIn){
-  let proId = req.params.proId
-  let userId = req.session.user._id
-  wishlisthelpers.addToWishlist(proId, userId).then(() => {
-    res.json({ status: true })
-  }).catch(() => {
-    res.json({ status: false })
-  })
-}else{
-  res.json({login:true})
-}
+  if (req.session.userLoggedIn) {
+    let proId = req.params.proId
+    let userId = req.session.user._id
+    wishlisthelpers.addToWishlist(proId, userId).then(() => {
+      res.json({ status: true })
+    }).catch(() => {
+      res.json({ status: false })
+    })
+  } else {
+    res.json({ login: true })
+  }
 })
 
 // wishlist get
@@ -607,7 +607,32 @@ router.get('/logout', (req, res) => {
 //     res.json({response})
 //   })
 // })
-module.exports = router;
+router.get('/filter-product', async(req, res) => {
+  console.log("filter function called")
+  console.log(req.query)
+  const { range, status } = req.query
+  console.log(status);
+  let startRange=0; 
+  let lastRange = 0;
+  if (status !== 'true')return;
+  console.log('ddddddd');
+  if (range === "price-1") {  startRange = 1000;  lastRange = 2000 }
+  if (range === "price-2") {  startRange = 100;  lastRange = 200 } 
+  if (range === "price-3") {  startRange = 200;  lastRange = 300 }
+ const data = await producthelpers.filterPrice(startRange, lastRange)  
+ if(data){
+   console.log(data);
+  res.status(200).json(data)
+ }
+}) 
+
+router.get('/search',async(req,res) => {
+  const searchKey = req.query.searchKey
+  const response =await producthelpers.getProductsBySearch(searchKey)
+  res.json(response)
+})
+
+module.exports = router; 
 
 
 
