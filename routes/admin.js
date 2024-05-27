@@ -26,7 +26,6 @@ const verifyAdminLogin = (req, res, next) => {
   }
 }
 
-// admin login get
 router.get('/login', (req, res) => {
   let loginErr = req.session.loginErr
   res.render('admin/login', { loginErr })
