@@ -49,7 +49,7 @@ router.get('/', async (req, res, next) => {
     let startCategoryOffer = await offerHelpers.startCategoryOffer(todayDate)
     let startCouponOffer = await couponHelpers.startCouponOffer(todayDate)
     let products = await producthelpers.getAllProducts()
-    products.forEach((element) => {
+    products?.forEach((element) => {
       if (element.stock < 10 && element.stock != 0) {
         element.fewStock = true
       } else if (element.stock == 0) {
@@ -62,8 +62,8 @@ router.get('/', async (req, res, next) => {
       cartCount = await carthelpers.getCartCount(user._id)
     }
     res.render('user/index', { products, user, cartCount, wishCount, banners })
-  } catch {
-    res.redirect('/')
+  } catch (error){
+    console.log("error ", error)
   }
 
 });

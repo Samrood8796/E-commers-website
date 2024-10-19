@@ -140,8 +140,7 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             try{
             let data = await db.get().collection(collection.COUPON_COLLECTION).find({ startDateIso: { $lte: couponStartDate } }).toArray();
-            console.log(data);
-            if (data) {
+            if (data?.length) {
                 await data.map(async (oneData) => {
                     db.get().collection(collection.COUPON_COLLECTION).updateOne({ _id: objectId(oneData._id) },
                         {

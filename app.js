@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var dotenv = require('dotenv')
-dotenv.config()
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
 var hbs = require('express-handlebars')
@@ -14,17 +13,11 @@ var db =require('./config/connection')
 var session =require('express-session')     
 var Handlebars = require('handlebars');
 
-
-// Handlebars.registerHelper('ifCond', function(v1, v2, options) {
-//   if(v1 === v2) {
-//     return options.fn(this);
-//   }
-//   return options.inverse(this);
-// });
+dotenv.config()
 
 Handlebars.registerHelper("inc", function(value, options)
 {
-    return parseInt(value) + 1;
+  return parseInt(value) + 1;
 });
 
 // view engine setup
@@ -64,4 +57,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+  console.log(`localhost://${port} connected`)
+});
+
